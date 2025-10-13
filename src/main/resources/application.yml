@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: springsecurity-webToken
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/security
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+key:
+  jwt:
+    secret: "your_secret_key_your_secret_key_your_secret_key_your_secret_key"
