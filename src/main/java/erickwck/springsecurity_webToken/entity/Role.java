@@ -32,6 +32,7 @@ public class Role {
     private Set<Authority> authority = new HashSet<>();
 
     public static class Values {
+        public static final String ROLE_CUSTOMER = "CUSTOMER";
         public static final String ROLE_EMPLOYEE = "EMPLOYEE";
         public static final String ROLE_MANAGER = "MANAGER";
         public static final String ROLE_ADMIN =  "ADMIN";

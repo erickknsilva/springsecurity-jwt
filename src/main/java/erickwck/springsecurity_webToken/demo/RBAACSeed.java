@@ -35,19 +35,23 @@ public class RBAACSeed implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //1 - persisti as authorites no banco para depois associa um role com elas
-        var expApprove = ensureAuthority(EXP_DELETE);
         var expRead = ensureAuthority(EXP_READ);
         var expCreate = ensureAuthority(EXP_CREATE);
+        var expDelete = ensureAuthority(EXP_DELETE);
         var expReadAny = ensureAuthority(EXP_READ_ANY);
-        var expApproveAny = ensureAuthority(EXP_DELETE_ANY);
+        var expDeleteAny = ensureAuthority(EXP_DELETE_ANY);
 
         //2 - persisti as roles no banco de dados com as authoritis associada
+        var roolerCustomer = ensureRole(ROLE_CUSTOMER, Set.of(expRead));
         var roolerEmployee = ensureRole(ROLE_EMPLOYEE, Set.of(expRead, expCreate));
-        var roleManager = ensureRole(ROLE_MANAGER, Set.of(expRead, expCreate, expApprove));
-        var roleAdmin = ensureRole(ROLE_ADMIN, Set.of(expRead, expCreate, expApprove, expApproveAny, expReadAny));
+        var roleManager = ensureRole(ROLE_MANAGER, Set.of(expRead, expCreate, expDelete));
+        var roleAdmin = ensureRole(ROLE_ADMIN, Set.of(expRead, expCreate, expDelete, expDeleteAny, expReadAny));
 
         //3 - Cadastra os usuarios com as Roles/Authorities associadas
+        ensureUser("ana", "senha", Department.IT, roolerCustomer);
+        ensureUser("beatriz", "senha", Department.IT, roolerCustomer);
         ensureUser("emily", "senha", Department.IT, roolerEmployee);
+        ensureUser("nathalia", "senha", Department.IT, roolerEmployee);
         ensureUser("erick", "senha", Department.IT, roleManager);
         ensureUser("bruno", "senha", Department.ENG, roleManager);
         ensureUser("admin", "123", Department.ENG, roleAdmin);
@@ -68,7 +72,6 @@ public class RBAACSeed implements CommandLineRunner {
                 .orElseGet(() -> roleRepository.save(new Role(null, name, authorities)));
     }
 
-
     public User ensureUser(String username, String password, Department department, Role role) {
         return userRepository
                 .findByUsername(username)
@@ -80,4 +83,6 @@ public class RBAACSeed implements CommandLineRunner {
                 })
                 .orElseGet(() -> userRepository.save(new User(null, username, passwordEncoder.encode(password), department, Set.of(role))));
     }
+
+
 }

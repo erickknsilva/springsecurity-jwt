@@ -27,10 +27,10 @@ public class Authority {
     }
 
     public static class Values {
-        public static final String EXP_CREATE = "product:create";
         public static final String EXP_READ = "product:read";
-        public static final String EXP_READ_ANY = "product:read:any";
+        public static final String EXP_CREATE = "product:create";
         public static final String EXP_DELETE = "product:delete";
+        public static final String EXP_READ_ANY = "product:read:any";
         public static final String EXP_DELETE_ANY = "product:delete:any";
     }
 }

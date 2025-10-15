@@ -1,18 +1,14 @@
 package erickwck.springsecurity_webToken.service;
 
 
-import erickwck.springsecurity_webToken.entity.Authority;
-import erickwck.springsecurity_webToken.entity.Role;
 import erickwck.springsecurity_webToken.utilitys.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,4 +34,5 @@ public class AuthenticationService {
 
         return jwtUtil.generateToken(user);
     }
+
 }

@@ -5,25 +5,21 @@ import erickwck.springsecurity_webToken.entity.TypeProduct;
 
 import java.math.BigDecimal;
 
-public record ProductResponse(
+public record ProductResponseListAll(
         Long id,
         String name,
         BigDecimal price,
         String description,
-        TypeProduct typeProduct,
-        String ownerUsername
+        TypeProduct typeProduct
 ) {
 
-    public static ProductResponse entityFromProductResponse(Product produto) {
-        return new ProductResponse(
+    public static ProductResponseListAll productResponseListAll(Product produto) {
+        return new ProductResponseListAll(
                 produto.getId(),
                 produto.getName(),
                 produto.getPrice(),
                 produto.getDescription(),
-                produto.getTypeProduct(),
-                produto.getOwner().getUsername()
-        );
+                produto.getTypeProduct());
     }
-
 
 }
